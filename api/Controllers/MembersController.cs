@@ -52,6 +52,18 @@ namespace EzraTest.Controllers
 
         // TODO
         // Add an endpoint to update a member
+        [HttpPost]
+        [Route("/edit/{id}/{name}/{email}")]
+        public void EditMember(Guid id, string name, string email)
+        {
+            Member updatedMember = new Member
+            {
+                Id = id,
+                Name = name,
+                Email = email
+            };
+            _membersRepository.UpdateMember(id, updatedMember);
+        }
 
         // TODO
         // Add an endpoint to delete a member

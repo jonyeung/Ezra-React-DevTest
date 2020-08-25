@@ -56,7 +56,7 @@ namespace EzraTest.DB
         public void UpdateMember(Guid id, Member member)
         {
             // TODO
-            throw new NotImplementedException();
+            ExecuteNonQuery<Member>($"UPDATE MEMBERS SET Name='{member.Name}', Email='{member.Email}' WHERE Id='{id}'");
         }
 
         /// <inheritdoc />
