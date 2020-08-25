@@ -32,7 +32,7 @@ export class AddMember extends Component {
 
   async addMember() {
     // TODO
-    if (this.state.name == null) {
+    if (this.state.name == null || this.state.name.length == 0) {
       alert("Name cannot be empty.")
     } else if (this.state.email == null || !this.validateEmail(this.state.email)) {
       alert("Please enter a valid email address.")
