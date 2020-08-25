@@ -1,0 +1,16 @@
+#addInputs {
+    display: block;
+    margin-bottom: 20px;
+}
+
+#addInputs input {
+    margin: 10px;
+}
+
+#emailTxt {
+    margin-right: 4px;
+}
+
+#addEmail {
+    padding-right: 2px;
+}
