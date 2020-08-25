@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EzraTest.Controllers
 {
+
     [ApiController]
     [Route("members")]
     public class MembersController : ControllerBase

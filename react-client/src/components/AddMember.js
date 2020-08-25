@@ -37,22 +37,11 @@ export class AddMember extends Component {
     } else if (this.state.email == null || !this.validateEmail(this.state.email)) {
       alert("Please enter a valid email address.")
     } else {
-      const response = await fetch('http://localhost:5000/add/' + this.state.name + '/' + this.state.email, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: this.state.name,
-          email: this.state.email
-        })
-      });
-      // console.log(response.text());
-      // if (response.ok) {
-      //   console.log("Response was ok")
-      //   this.setState({success:true})
-      // }
+      const response = await fetch('http://localhost:5000/add/' + this.state.name + '/' + this.state.email, {method: 'POST'});
+      if (response.ok) {
+        alert("Successfully added new member.")
+        this.setState({success:true})
+      }
     }
     
   }

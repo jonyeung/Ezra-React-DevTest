@@ -78,18 +78,11 @@ export class Home extends Component {
 
   async deleteMember(memberId) {
     // TODO
-    const response = await fetch('http://localhost:5000/delete/' + memberId, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: memberId
-      })
-    })
-    alert("User: " + memberId + " successfully deleted.")
-    this.populateMembers();
+    const response = await fetch('http://localhost:5000/delete/' + memberId, {method: 'POST'})
+    if (response.ok) {
+      alert("User: " + memberId + " successfully deleted.")
+      this.populateMembers();
+    }
   }
 
   async editMember(memberId) {
