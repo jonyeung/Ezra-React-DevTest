@@ -63,7 +63,7 @@ namespace EzraTest.DB
         public void DeleteMember(Guid id)
         {
             // TODO
-            throw new NotImplementedException();
+            ExecuteNonQuery<Member>($"DELETE FROM MEMBERS WHERE ID = '{id}'");
         }
 
         private IEnumerable<T> ExecuteQuery<T>(string commandText, Func<SqliteDataReader, T> func)

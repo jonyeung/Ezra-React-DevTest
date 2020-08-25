@@ -48,11 +48,11 @@ export class AddMember extends Component {
           email: this.state.email
         })
       });
-      console.log(response.text());
-      if (response.ok) {
-        console.log("Response was ok")
-        this.setState({success:true})
-      }
+      // console.log(response.text());
+      // if (response.ok) {
+      //   console.log("Response was ok")
+      //   this.setState({success:true})
+      // }
     }
     
   }
@@ -60,28 +60,30 @@ export class AddMember extends Component {
   render() {
     if (this.state.success) {
       return <Home />
-    }
-    return (
-      <div>
-        <h1>Add Member</h1>
-
-        {/* TODO */}
-        {/* Implement me */}
-        <div id="addInputs">
-          <div>
-            <span id="nameTxt">Name:</span>
-            <input id="name" onChange={this.handleChange}></input>
+    } else {
+      return (
+        <div>
+          <h1>Add Member</h1>
+  
+          {/* TODO */}
+          {/* Implement me */}
+          <div id="addInputs">
+            <div>
+              <span id="nameTxt">Name:</span>
+              <input id="name" onChange={this.handleChange}></input>
+            </div>
+            <div>
+              <span id="emailTxt">Email:</span>
+              <input id="email" onChange={this.handleChange}></input>
+            </div>
           </div>
-          <div>
-            <span id="emailTxt">Email:</span>
-            <input id="email" onChange={this.handleChange}></input>
-          </div>
+  
+          <button className="btn btn-primary" onClick={this.addMember}>
+            Add
+          </button>
         </div>
-
-        <button className="btn btn-primary" onClick={this.addMember}>
-          Add
-        </button>
-      </div>
-    )
+      )
+    }
+    
   }
 }

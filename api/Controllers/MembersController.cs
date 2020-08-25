@@ -54,5 +54,11 @@ namespace EzraTest.Controllers
 
         // TODO
         // Add an endpoint to delete a member
+        [HttpPost]
+        [Route("/delete/{id}")]
+        public void DeleteMember(Guid id)
+        {
+            _membersRepository.DeleteMember(id);
+        }
     }
 }
