@@ -110,7 +110,7 @@ export class Home extends Component {
   }
 
   handleCancel() {
-    this.setState({editMode:false, editId: null})
+    this.setState({editMode:false, editId: null, editMember: null, newName: null, newEmail: null})
   }
 
   render() {
