@@ -17,3 +17,16 @@
   display: flex;
   flex-direction: row;
 }
+
+#editInputs {
+  display:block;
+  margin: 10px;
+}
+
+#editInputs input {
+  margin: 6px;
+}
+
+.btn-primary {
+  margin: 6px;
+}

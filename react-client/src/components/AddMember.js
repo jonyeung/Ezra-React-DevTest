@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Home } from './Home';
+import {validateEmail} from '../Validation'
 
 import "./AddMember.css"
 
@@ -20,21 +21,11 @@ export class AddMember extends Component {
     })
   }
 
-  // regex taken from https://www.w3resource.com/javascript/form/email-validation.php
-  validateEmail(mail) {
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (mail.match(mailformat)) {
-      return (true)
-    } else {
-      return (false)
-    }
-  }
-
   async addMember() {
     // TODO
     if (this.state.name == null || this.state.name.length == 0) {
       alert("Name cannot be empty.")
-    } else if (this.state.email == null || !this.validateEmail(this.state.email)) {
+    } else if (this.state.email == null || !validateEmail(this.state.email)) {
       alert("Please enter a valid email address.")
     } else {
       const response = await fetch('http://localhost:5000/add/' + this.state.name + '/' + this.state.email, {method: 'POST'});

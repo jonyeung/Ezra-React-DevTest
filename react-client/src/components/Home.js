@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {validateEmail} from '../Validation'
 
 import './Home.css'
 
@@ -7,11 +8,53 @@ export class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { members: [], loading: true }
+    this.state = { members: [], loading: true, editMode: false, editId: null, editMember: null, newName: null, newEmail: null }
+
+    this.handleSave = this.handleSave.bind(this)
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.renderEditInputs = this.renderEditInputs.bind(this);
   }
 
   componentDidMount() {
     this.populateMembers()
+  }
+
+  componentDidUpdate() {
+    if (!this.state.editMode) {
+      this.populateMembers()
+    }
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+  }
+
+  renderEditInputs() {
+    const member = this.state.editMember
+    return (
+      <div>
+        <div id="editInputs">
+          <span>Editing MemberID: {member.id}</span>
+            <div>
+              <span id="nameTxt">Name:</span>
+              <input id="newName" onChange={this.handleChange} defaultValue={member.name}></input>
+            </div>
+            <div>
+              <span id="emailTxt">Email:</span>
+              <input id="newEmail" onChange={this.handleChange} defaultValue={member.email}></input>
+            </div>
+        </div>
+        <button className="btn btn-primary" onClick={this.handleSave}>
+        Save
+        </button>
+        <button className="btn btn-primary" onClick={this.handleCancel}>
+        Cancel
+        </button>
+      </div>
+    )
   }
 
   renderMembersTable(members) {
@@ -52,14 +95,38 @@ export class Home extends Component {
     )
   }
 
+  async handleSave() {
+    if (this.state.newName == null || this.state.newName.length == 0) {
+      alert("Name cannot be empty.")
+    } else if (this.state.newEmail == null || !validateEmail(this.state.newEmail)) {
+      alert("Please enter a valid email address.")
+    } else {
+      const response = await fetch('http://localhost:5000/update/' + this.state.editId + '/' + this.state.newName + '/' + this.state.newEmail, {method: 'POST'});
+      if (response.ok) {
+        alert("Successfully edited " + this.state.editId + ".")
+        this.setState({ editMode: false, editId: null, editMember: null, newName: null, newEmail: null})
+      }
+    }
+  }
+
+  handleCancel() {
+    this.setState({editMode:false, editId: null})
+  }
+
   render() {
-    let contents = this.state.loading ? (
+    let contents = <p></p>
+    if (this.state.loading) {
+      contents = 
       <p>
         <em>Loading...</em>
       </p>
-    ) : (
-      this.renderMembersTable(this.state.members)
-    )
+    } else {
+      if (this.state.editMode) {
+        contents = this.renderEditInputs()
+      } else {
+        contents = this.renderMembersTable(this.state.members)
+      }
+    }
 
     return (
       <div>
@@ -87,6 +154,8 @@ export class Home extends Component {
 
   async editMember(memberId) {
     // TODO
-    throw 'Implement me'
+    const response = await fetch('http://localhost:5000/' + memberId, {method: 'GET'})
+    const data = await response.json()
+    this.setState({ editMode: true, editMember: data, loading: false, editId: memberId, newName: data.name, newEmail:data.email })
   }
 }

@@ -28,7 +28,7 @@ namespace EzraTest.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("/{id}")]
         public Member GetMember(Guid id)
         {
             return _membersRepository.GetMember(id);
@@ -53,8 +53,8 @@ namespace EzraTest.Controllers
         // TODO
         // Add an endpoint to update a member
         [HttpPost]
-        [Route("/edit/{id}/{name}/{email}")]
-        public void EditMember(Guid id, string name, string email)
+        [Route("/update/{id}/{name}/{email}")]
+        public void UpdateMember(Guid id, string name, string email)
         {
             Member updatedMember = new Member
             {
