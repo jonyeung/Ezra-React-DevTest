@@ -1,4 +1,4 @@
-# Ezra Full Stack developer test
+# Ezra Full Stack developer test done using REACT
 
 ## Completed Tasks
 
@@ -20,4 +20,6 @@
 ## Notes
 
 - Updating members works for new members I added but will not work on pre-existing members in the DB
-- Overall not too difficult but I got stumped on certain parts due to my unfamiliarity with React
+- Overall not too difficult but I got stumped on certain parts due to my unfamiliarity with React (chose React due to not being familiar with Angular or Vue)
+- Spent ~6 hours (coding and debugging time)
+- Did not where to run the SQL script to reset the DB
